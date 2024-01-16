@@ -5,7 +5,14 @@ import 'package:reusemart_app/widgets/text_widget.dart';
 import '../provider/dark_theme_provider.dart';
 
 class CategoriesWidget extends StatelessWidget {
-  const CategoriesWidget({Key? key}) : super(key: key);
+ const CategoriesWidget(
+      {Key? key,
+      required this.catText,
+      required this.imgPath,
+      required this.passedColor})
+      : super(key: key);
+  final String catText, imgPath;
+  final Color passedColor;
 
   @override
   Widget build(BuildContext context) {
