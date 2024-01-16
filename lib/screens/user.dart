@@ -177,7 +177,7 @@ class _UserScreenState extends State<UserScreen> {
         return AlertDialog(
           title: Row(
             children: [
-              Image.asset('assets/images/R.jpg',
+              Image.asset('assets/images/warning-sign.png',
                   height: 20, width: 20, fit: BoxFit.fill),
               const SizedBox(
                 width: 8,
