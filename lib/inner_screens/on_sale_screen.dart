@@ -1,30 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:reusemart_app/services/utilis.dart';
 import 'package:reusemart_app/widgets/on_sale_widget.dart';
 import 'package:reusemart_app/widgets/text_widget.dart';
-
+import '../services/utilis.dart';
+import '../widgets/back_widget.dart';
 
 class OnSaleScreen extends StatelessWidget {
   static const routeName = "/OnSaleScreen";
   const OnSaleScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    bool isEmpty = false;
+    bool _isEmpty = false;
     final Color color = Utils(context).color;
     Size size = Utils(context).getScreenSize;
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            IconlyLight.arrowLeft2,
-            color: color,
-          ),
-        ),
+        leading: const BackWidget(),
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: TextWidget(
@@ -34,8 +25,8 @@ class OnSaleScreen extends StatelessWidget {
           isTitle: true,
         ),
       ),
-      body: isEmpty 
-      ? Center(
+      body: _isEmpty
+          ? Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(

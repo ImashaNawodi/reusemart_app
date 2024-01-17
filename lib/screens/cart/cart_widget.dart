@@ -2,9 +2,13 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:reusemart_app/widgets/heart_btn.dart';
+import 'package:reusemart_app/inner_screens/product_details.dart';
+import 'package:reusemart_app/services/global_method.dart';
+import 'package:reusemart_app/services/utilis.dart';
 import 'package:reusemart_app/widgets/text_widget.dart';
-import '../../services/utilis.dart';
+
+import '../../inner_screens/on_sale_screen.dart';
+import '../../widgets/heart_btn.dart';
 
 class CartWidget extends StatefulWidget {
   const CartWidget({Key? key}) : super(key: key);
@@ -32,7 +36,10 @@ class _CartWidgetState extends State<CartWidget> {
     final Color color = Utils(context).color;
     Size size = Utils(context).getScreenSize;
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        GlobalMethods.navigateTo(
+            ctx: context, routeName: ProductDetails.routeName);
+      },
       child: Row(
         children: [
           Expanded(
@@ -73,7 +80,19 @@ class _CartWidgetState extends State<CartWidget> {
                           child: Row(
                             children: [
                               _quantityController(
-                                fct: () {},
+                                fct: () {
+                                  if (_quantityTextController.text == '1') {
+                                    return;
+                                  } else {
+                                    setState(() {
+                                      _quantityTextController.text = (int.parse(
+                                                  _quantityTextController
+                                                      .text) -
+                                              1)
+                                          .toString();
+                                    });
+                                  }
+                                },
                                 color: Colors.red,
                                 icon: CupertinoIcons.minus,
                               ),
@@ -105,7 +124,14 @@ class _CartWidgetState extends State<CartWidget> {
                                 ),
                               ),
                               _quantityController(
-                                fct: () {},
+                                fct: () {
+                                  setState(() {
+                                    _quantityTextController.text = (int.parse(
+                                                _quantityTextController.text) +
+                                            1)
+                                        .toString();
+                                  });
+                                },
                                 color: Colors.green,
                                 icon: CupertinoIcons.plus,
                               )
@@ -139,7 +165,10 @@ class _CartWidgetState extends State<CartWidget> {
                           )
                         ],
                       ),
-                    )
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
                   ],
                 ),
               ),
@@ -168,10 +197,11 @@ class _CartWidgetState extends State<CartWidget> {
               fct();
             },
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(6.0),
               child: Icon(
                 icon,
                 color: Colors.white,
+                size: 20,
               ),
             ),
           ),
